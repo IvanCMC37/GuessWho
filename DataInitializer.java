@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DataInitializer {
 
@@ -22,19 +21,23 @@ public class DataInitializer {
 	static ArrayList<PersonalDescriptions> people = new ArrayList<PersonalDescriptions>();
 	
 	public static ArrayList<PersonalDescriptions> importData(String gameFilename) throws IOException {
-		people.clear();
-		gmaeConfiguration = new File(gameFilename);
+		//clear ArrayList to prevent unwanted error
+		people.clear();	
 		
 		//check if the game configuration files are within input
+		gmaeConfiguration = new File(gameFilename);
 		if(!gmaeConfiguration.exists()) {
 			System.out.println("No game Configuration files are loaded, please check and re-run the program!");
 			throw new IOException();
 		}
+		
+		//call function to import data one by one
 		playerDataImport();
 		
 		return (people);
 	}
 	
+	//function to read though game configuration and fill into constructor 
 	public static void playerDataImport() throws IOException {
 		String input;
 		int descriptionAdded = 0;
@@ -44,6 +47,7 @@ public class DataInitializer {
 		
 		while((input = br.readLine())!=null) {
 			
+			//import start when read a name
 			if(input.startsWith("P")) {
 				importStart = true;
 			}
@@ -51,16 +55,21 @@ public class DataInitializer {
 				descriptionAdded++;
 				assignData(input);		
 			}
+			
+			//since there are total 10 attributes in each person, reset afterwards
 			if(descriptionAdded == 10) {
+				//fill all known attributes to constructor then to ArrayList
 				people.add(new PersonalDescriptions(name, hairLength, glasses, facialHair, eyeColor, pimples, hat,
 						hairColor,noseShape, faceShape));
 				descriptionAdded = 0;
 				importStart = false;
 			}
 		}	
+		//close stream to prevent memory leak
 		br.close();	
 	}
 	
+	//assign different attribute depends on readline result
 	public static void assignData(String input) {
 		String[] splitStr = input.split("\\s+");
 		
@@ -97,43 +106,4 @@ public class DataInitializer {
 			break;
 		}
 	}
-	
-//	public HashMap<String, ArrayList<String>> availableProperties(String gameFilename)throws IOException {
-//		ArrayList<String> properties = new ArrayList<String>();
-//		String key = null;
-//		HashMap<String, ArrayList<String>> hashMap = new HashMap<String, ArrayList<String>>();
-//		properties.clear();
-//		hashMap.clear();
-//		gmaeConfiguration = new File(gameFilename);
-//		String input;
-//		int rowCount = 0;
-//		//check if the game configuration files are within input
-//		if(!gmaeConfiguration.exists()) {
-//			System.out.println("No game Configuration files are loaded, please check and re-run the program!");
-//			throw new IOException();
-//		}
-//		
-//		BufferedReader br = new BufferedReader(new FileReader(gmaeConfiguration));
-//		while((input = br.readLine())!=null) {
-//			if(rowCount < 9) {
-//				String[] splitStr = input.split("\\s+");
-//				for(int i = 0; 0 < splitStr.length; i++ ) {
-//					if(i == 0)
-//						key = splitStr[0];
-//					else 
-//						properties.add(splitStr[i]);
-//					
-//				}
-//				if(key !=null)
-//					hashMap.put(key, properties);
-//				properties.clear();
-//				rowCount++;
-//			}
-//			else {
-//				break;
-//			}
-//		}
-//		br.close();
-//		return (hashMap);
-//	}
 }
