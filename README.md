@@ -3,11 +3,13 @@ Design and implement Guess Who guessing algorithms.
 
 To compile the fles, run the following command from the root directory (the directory that Guess-
 Who.java is in):
+
 javac -cp .:jopt-simple-5.0.2.jar *.java
 
 Note that for Windows machine, remember to replace ':' with ';' in the classpath.
 
 To run the Guess Who framework:
+
 java -cp .:jopt-simple-5.0.2.jar GuessWho [-l <game log file>] <game configuration file> <chosen person file>
 <player 1 type> <player 2 type>
 where
