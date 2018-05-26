@@ -52,10 +52,12 @@ public class RandomGuessPlayer implements Player
 
 
     public Guess guess() {    	
-    	System.out.print("Guess choice: ");
-    	for(int i  =0; i< people.size(); i++)
-    		System.out.print(people.get(i).getName()+" ");
-    	System.out.println();
+//    	System.out.print("Guess choice: ");
+//    	for(int i  =0; i< people.size(); i++)
+//    		System.out.print(people.get(i).getName()+" ");
+//    	System.out.println();
+//    	System.out.println(people.size());
+    	
     	//if remaining only 1 person to be guessed, just guess without computing
     	if(personCount == 1 )
     		return new Guess(Guess.GuessType.Person, "", people.get(0).getName());

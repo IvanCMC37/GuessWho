@@ -98,42 +98,42 @@ public class DataInitializer {
 		}
 	}
 	
-	public HashMap<String, ArrayList<String>> availableProperties(String gameFilename)throws IOException {
-		ArrayList<String> properties = new ArrayList<String>();
-		String key = null;
-		HashMap<String, ArrayList<String>> hashMap = new HashMap<String, ArrayList<String>>();
-		properties.clear();
-		hashMap.clear();
-		gmaeConfiguration = new File(gameFilename);
-		String input;
-		int rowCount = 0;
-		//check if the game configuration files are within input
-		if(!gmaeConfiguration.exists()) {
-			System.out.println("No game Configuration files are loaded, please check and re-run the program!");
-			throw new IOException();
-		}
-		
-		BufferedReader br = new BufferedReader(new FileReader(gmaeConfiguration));
-		while((input = br.readLine())!=null) {
-			if(rowCount < 9) {
-				String[] splitStr = input.split("\\s+");
-				for(int i = 0; 0 < splitStr.length; i++ ) {
-					if(i == 0)
-						key = splitStr[0];
-					else 
-						properties.add(splitStr[i]);
-					
-				}
-				if(key !=null)
-					hashMap.put(key, properties);
-				properties.clear();
-				rowCount++;
-			}
-			else {
-				break;
-			}
-		}
-		br.close();
-		return (hashMap);
-	}
+//	public HashMap<String, ArrayList<String>> availableProperties(String gameFilename)throws IOException {
+//		ArrayList<String> properties = new ArrayList<String>();
+//		String key = null;
+//		HashMap<String, ArrayList<String>> hashMap = new HashMap<String, ArrayList<String>>();
+//		properties.clear();
+//		hashMap.clear();
+//		gmaeConfiguration = new File(gameFilename);
+//		String input;
+//		int rowCount = 0;
+//		//check if the game configuration files are within input
+//		if(!gmaeConfiguration.exists()) {
+//			System.out.println("No game Configuration files are loaded, please check and re-run the program!");
+//			throw new IOException();
+//		}
+//		
+//		BufferedReader br = new BufferedReader(new FileReader(gmaeConfiguration));
+//		while((input = br.readLine())!=null) {
+//			if(rowCount < 9) {
+//				String[] splitStr = input.split("\\s+");
+//				for(int i = 0; 0 < splitStr.length; i++ ) {
+//					if(i == 0)
+//						key = splitStr[0];
+//					else 
+//						properties.add(splitStr[i]);
+//					
+//				}
+//				if(key !=null)
+//					hashMap.put(key, properties);
+//				properties.clear();
+//				rowCount++;
+//			}
+//			else {
+//				break;
+//			}
+//		}
+//		br.close();
+//		return (hashMap);
+//	}
 }
